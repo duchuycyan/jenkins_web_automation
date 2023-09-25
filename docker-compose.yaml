@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  pricelist-web:
+    image: pricelist
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: python manage.py runserver 0.0.0.0:80
+    ports:
+      - 80:80
+    env_file: 
+      - ./.env

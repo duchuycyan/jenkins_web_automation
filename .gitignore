@@ -1,0 +1,8 @@
+*.vscode
+*.pyc
+*/env_crawl/
+*/env/
+/env/
+/env_crawl/
+test*
+*/__pycache__/

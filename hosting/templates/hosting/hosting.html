@@ -1,0 +1,83 @@
+{% extends "domain/base.html" %}
+
+{% block title %}Hosting{% endblock %}
+
+{% block content %}
+  <div class="container col-sm-6 col-lg-6 text-center mx-auto mt-5 justify-content-center">
+    <h3 class="text-primary m-4 font-weight-bolder">Bảng giá Hosting</h3>
+    <p>Tổng hợp bảng giá Hosting của các nhà cung cấp lớn ở Việt Nam và trên thế giới,
+      giúp bạn thuê được Hosting rẻ nhất, tiết kiệm nhất.</p>
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary font-weight-bolder">Đăng ký</button>
+      <button type="button" class="btn btn-primary font-weight-bolder">Gia hạn</button>
+      <button type="button" class="btn btn-primary font-weight-bolder">Transfer</button>
+    </div>
+  </div>
+  <div class="col-sm-8 col-lg-8 text-center mx-auto mt-5">
+    <div class="container">
+      <div class="table-responsive-lg">
+        <table class="table table-bordered">
+          <thead class="text-center">
+            <tr style="background-color: #00a3e6;">
+              <th></th>
+              <th><i class="fas fa-star mr-2" style="color: #e71c24;"></i>Cheapest</th>
+              <th><i class="fas fa-star mr-2" style="color: blue;"></i>Second</th>
+              <th><i class="fas fa-star mr-2" style="color: #febe0d;"></i>Third</th>
+              <th></th>
+            </tr style="border-bottom:  #7ca135;">
+          </thead>
+          <tbody>
+            <tr>
+              <td class="font-weight-bolder m-3">.COM</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            <tr>
+              <td class="font-weight-bolder m-3">.NET</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="font-weight-bolder m-3">.ORG</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="font-weight-bolder m-3">.INFO</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="font-weight-bolder m-3">.COM.VN</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="font-weight-bolder m-3">.VN</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="container col-md-8 text-center">
+    <pre style="font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;" class="m-1 font-italic">
+      ***Giá đã bao gồm VAT hoặc phí ICANN nếu có.
+      Nhấn vào biểu tượng <i class="fas fa-link m-1 text-primary"></i> để xem thông tin chi tiết.
+    </pre>
+    <p class="mb-3"><b>Sử dụng ô Tìm kiếm</b> để xem thêm.</p>
+  </div>
+{% endblock %}

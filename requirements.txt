@@ -1,0 +1,7 @@
+beautifulsoup4==4.8.2
+Django==2.1.*
+html5lib==1.0.1
+ipython==7.11.1
+ipython-genutils==0.2.0
+pylint==2.4.4
+requests==2.22.0

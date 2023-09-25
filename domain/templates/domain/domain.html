@@ -1,0 +1,1257 @@
+{% extends "domain/base.html" %}
+
+{% block title %}tên miền{% endblock %}
+
+{% block content %}
+{% load static %}
+{% load custom_filter %}
+  <div class="container col-sm-6 col-lg-10 text-center mx-auto mt-5 justify-content-center mb-5">
+    <h3 class="text-primary m-4 font-weight-bolder">Bảng giá tên miền</h3>
+    <p>Tổng hợp bảng giá tên miền của các nhà cung cấp lớn ở Việt Nam và trên thế giới,
+      giúp bạn mua được tên miền rẻ nhất, tiết kiệm nhất.</p>
+    <div class="btn-group">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <button type="button" class="nav-link active btn btn-primary rounded-0 font-weight-bolder" data-toggle="tab" href="#regTable">Đăng ký</button>
+        </li>
+        <li class="nav-item">
+          <button type="button" class="nav-link btn btn-primary rounded-0 font-weight-bolder" data-toggle="tab" href="#renewTable">Gia hạn</button>
+        </li>
+        <li class="nav-item">
+          <button type="button" class="nav-link btn btn-primary rounded-0 font-weight-bolder" data-toggle="tab" href="#transTable">Transfer</a>
+        </li>
+      </ul>
+    </div>
+    <!-- <div class="col-lg-3 mx-auto mt-3">
+      <form>
+        <div class="form-row">
+          <input type="text" name="tld" class="form-control form-control-sm mx-auto" placeholder="Nhập tên miền khác muốn tìm kiếm">
+        </div>
+      </form>
+    </div>  -->
+    <!-- <form>
+      <select name="cars" class="custom-select mt-3 w-25">
+        <option selected value="1">1 tháng</option>
+        <option value="3">3 tháng</option>
+        <option value="12">12 tháng</option>
+      </select>
+    </form> -->
+  </div>
+  <div class="col-sm-12 col-lg-12 mx-auto mt-3">
+    <div class="container tab-content">
+      <div class="table-responsive tab-pane active" id="regTable">
+        <table class="table table-bordered">
+          <thead class="text-center">
+            <tr style="background-color: #00a3e6;">
+              <th></th>
+              <th colspan="2"><i class="fas fa-star mr-2" style="color: #e71c24;"></i>Cheapest</th>
+              <th colspan="2"><i class="fas fa-star mr-2" style="color: blue;"></i>Second</th>
+              <th colspan="2"><i class="fas fa-star mr-2" style="color: #febe0d;"></i>Third</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="font-weight-bolder">.COM</td>
+              {% if lst_cheapest.0.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ lst_cheapest.0.0|currency }} VNĐ">${{ lst_cheapest.0.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_cheapest.0.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_cheapest.0.2}}">  {{ lst_cheapest.0.1 }}</a></td>
+              {% else %}
+              <td>
+                <div>{{ lst_cheapest.0.0|currency }}
+                  {% if lst_cheapest.0.5 %}
+                  <a data-toggle="popover" data-placement="top" data-content="{{ lst_cheapest.0.5 }}"><i class="fas fa-exclamation-circle text-success"></i></a>
+                  {% endif %}
+                </div>
+              </td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_cheapest.0.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_cheapest.0.2}}">  {{ lst_cheapest.0.1 }}</a></td>
+              {% endif %}
+              {% if lst_second.0.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ lst_second.0.0|currency }} VNĐ">${{ lst_second.0.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_second.0.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_second.0.2}}">  {{ lst_second.0.1 }}</a></td>
+              {% else %}
+              <td>
+                <div>{{ lst_second.0.0|currency }}</div>
+                {% if lst_second.0.5 %}
+                  <a data-toggle="popover" data-placement="top" data-content="{{ lst_second.0.5 }}"><i class="fas fa-exclamation-circle text-success"></i></a>
+                {% endif %}
+              </td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_second.0.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_second.0.2}}">  {{ lst_second.0.1 }}</a></td>
+              {% endif %}
+              {% if lst_third.0.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ lst_third.0.0|currency }} VNĐ">${{ lst_third.0.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_third.0.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_third.0.2}}">  {{ lst_third.0.1 }}</a></td>
+              {% else %}
+              <td>
+                <div>{{ lst_third.0.0|currency }}
+                  {% if lst_third.0.5 %}
+                  <a data-toggle="popover" data-placement="top" data-content="{{ lst_third.0.5 }}"><i class="fas fa-exclamation-circle text-success"></i></a>
+                  {% endif %}
+                </div>
+              </td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_third.0.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_third.0.2}}">  {{ lst_third.0.1 }}</a></td>
+              {% endif %}
+              <td><a class="text-decoration-none" data-toggle="modal" href="#comModal">+ {{ lst_count.0 }} more</a></td>
+            <tr>
+              <td class="font-weight-bolder">.NET</td>
+              {% if lst_cheapest.1.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ lst_cheapest.1.0|currency }} VNĐ">${{ lst_cheapest.1.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_cheapest.1.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_cheapest.1.2}}">  {{ lst_cheapest.1.1 }}</a></td>
+              {% else %}
+              <td>
+                <div>{{ lst_cheapest.1.0|currency }}
+                  {% if lst_cheapest.1.5 %}
+                  <a data-toggle="popover" data-placement="top" data-content="{{ lst_cheapest.1.5 }}"><i class="fas fa-exclamation-circle text-success"></i></a>
+                  {% endif %}
+                </div>
+              </td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_cheapest.1.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_cheapest.1.2}}">  {{ lst_cheapest.1.1 }}</a></td>
+              {% endif %}
+              {% if lst_second.1.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ lst_second.1.0|currency }} VNĐ">${{ lst_second.1.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_second.1.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_second.1.2}}">  {{ lst_second.1.1 }}</a></td>
+              {% else %}
+              <td>
+                <div>{{ lst_second.1.0|currency }}
+                  {% if lst_second.1.5 %}
+                  <a data-toggle="popover" data-placement="top" data-content="{{ lst_second.1.5 }}"><i class="fas fa-exclamation-circle text-success"></i></a>
+                  {% endif %}
+                </div>
+              </td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_second.1.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_second.1.2}}">  {{ lst_second.1.1 }}</a></td>
+              {% endif %}
+              {% if lst_third.1.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ lst_third.1.0|currency }} VNĐ">${{ lst_third.1.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_third.1.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_third.1.2}}">  {{ lst_third.1.1 }}</a></td>
+              {% else %}
+              <td>
+                <div>{{ lst_third.1.0|currency }}
+                  {% if lst_third.1.5 %}
+                  <a data-toggle="popover" data-placement="top" data-content="{{ lst_third.1.5 }}"><i class="fas fa-exclamation-circle text-success"></i></a>
+                  {% endif %}
+                </div>
+              </td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_third.1.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_third.1.2}}">  {{ lst_third.1.1 }}</a></td>
+              {% endif %}
+              <td><a class="text-decoration-none" data-toggle="modal" href="#netModal">+ {{ lst_count.1 }} more</a></td>
+            </tr>
+            <tr>
+              <td class="font-weight-bolder m-3">.ORG</td>
+              {% if lst_cheapest.2.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ lst_cheapest.2.0|currency }} VNĐ">${{ lst_cheapest.2.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_cheapest.2.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_cheapest.2.2}}">  {{ lst_cheapest.2.1 }}</a></td>
+              {% else %}
+              <td>
+                <div>{{ lst_cheapest.2.0|currency }}
+                  {% if lst_cheapest.2.5 %}
+                  <a data-toggle="popover" data-placement="top" data-content="{{ lst_cheapest.2.5 }}"><i class="fas fa-exclamation-circle text-success"></i></a>
+                  {% endif %}
+                </div>
+              </td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_cheapest.2.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_cheapest.2.2}}">  {{ lst_cheapest.2.1 }}</a></td>
+              {% endif %}
+              {% if lst_second.2.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ lst_second.2.0|currency }} VNĐ">${{ lst_second.2.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_second.2.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_second.2.2}}">  {{ lst_second.2.1 }}</a></td>
+              {% else %}
+              <td>
+                <div>{{ lst_second.2.0|currency }}
+                  {% if lst_second.2.5 %}
+                  <a data-toggle="popover" data-placement="top" data-content="{{ lst_second.2.5 }}"><i class="fas fa-exclamation-circle text-success"></i></a>
+                  {% endif %}
+                </div>
+              </td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_second.2.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_second.2.2}}">  {{ lst_second.2.1 }}</a></td>
+              {% endif %}
+              {% if lst_third.2.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ lst_third.2.0|currency }} VNĐ">${{ lst_third.2.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_third.2.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_third.2.2}}">  {{ lst_third.2.1 }}</a></td>
+              {% else %}
+              <td>
+                <div>{{ lst_third.2.0|currency }}
+                  {% if lst_third.2.5 %}
+                  <a data-toggle="popover" data-placement="top" data-content="{{ lst_third.2.5 }}"><i class="fas fa-exclamation-circle text-success"></i></a>
+                  {% endif %}
+                </div>
+              </td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_third.2.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_third.2.2}}">  {{ lst_third.2.1 }}</a></td>
+              {% endif %}
+              <td><a class="text-decoration-none" data-toggle="modal" href="#orgModal">+ {{ lst_count.2 }} more</a></td>
+            </tr>
+            <tr>
+              <td class="font-weight-bolder m-3">.INFO</td>
+              {% if lst_cheapest.3.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ lst_cheapest.3.0|currency }} VNĐ">${{ lst_cheapest.3.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_cheapest.3.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_cheapest.3.2}}">  {{ lst_cheapest.3.1 }}</a></td>
+              {% else %}
+              <td>
+                <div>{{ lst_cheapest.3.0|currency }}
+                  {% if lst_cheapest.3.5 %}
+                  <a data-toggle="popover" data-placement="top" data-content="{{ lst_cheapest.3.5 }}"><i class="fas fa-exclamation-circle text-success"></i></a>
+                  {% endif %}
+                </div>
+              </td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_cheapest.3.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_cheapest.3.2}}">  {{ lst_cheapest.3.1 }}</a></td>
+              {% endif %}
+              {% if lst_second.3.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ lst_second.3.0|currency }} VNĐ">${{ lst_second.3.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_second.3.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_second.3.2}}">  {{ lst_second.3.1 }}</a></td>
+              {% else %}
+              <td>
+                <div>{{ lst_second.3.0|currency }}
+                  {% if lst_second.3.5 %}
+                  <a data-toggle="popover" data-placement="top" data-content="{{ lst_second.3.5 }}"><i class="fas fa-exclamation-circle text-success"></i></a>
+                  {% endif %}
+                </div>
+              </td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_second.3.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_second.3.2}}">  {{ lst_second.3.1 }}</a></td>
+              {% endif %}
+              {% if lst_third.3.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ lst_third.3.0|currency }} VNĐ">${{ lst_third.3.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_third.3.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_third.3.2}}">  {{ lst_third.3.1 }}</a></td>
+              {% else %}
+              <td>
+                <div>{{ lst_third.3.0|currency }}
+                  {% if lst_third.3.5 %}
+                  <a data-toggle="popover" data-placement="top" data-content="{{ lst_third.3.5 }}"><i class="fas fa-exclamation-circle text-success"></i></a>
+                  {% endif %}
+                </div>
+              </td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_third.3.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_third.3.2}}">  {{ lst_third.3.1 }}</a></td>
+              {% endif %}
+              <td><a class="text-decoration-none" data-toggle="modal" href="#infoModal">+ {{ lst_count.3 }} more</a></td>
+            </tr>
+            <tr>
+              <td class="font-weight-bolder m-3">.COM.VN</td>
+              {% if lst_cheapest.4.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ lst_cheapest.4.0|currency }} VNĐ">${{ lst_cheapest.4.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_cheapest.4.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_cheapest.4.2}}">  {{ lst_cheapest.4.1 }}</a></td>
+              {% else %}
+              <td>
+                <div>{{ lst_cheapest.4.0|currency }}
+                  {% if lst_cheapest.4.5 %}
+                  <a data-toggle="popover" data-placement="top" data-content="{{ lst_cheapest.4.5 }}"><i class="fas fa-exclamation-circle text-success"></i></a>
+                  {% endif %}
+                </div>
+              </td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_cheapest.4.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_cheapest.4.2}}">  {{ lst_cheapest.4.1 }}</a></td>
+              {% endif %}
+              {% if lst_second.4.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ lst_second.4.0|currency }} VNĐ">${{ lst_second.4.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_second.2.4 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_second.4.2}}">  {{ lst_second.4.1 }}</a></td>
+              {% else %}
+              <td>
+                <div>{{ lst_second.4.0|currency }}
+                  {% if lst_second.4.5 %}
+                  <a data-toggle="popover" data-placement="top" data-content="{{ lst_second.4.5 }}"><i class="fas fa-exclamation-circle text-success"></i></a>
+                  {% endif %}
+                </div>
+              </td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_second.4.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_second.4.2}}">  {{ lst_second.4.1 }}</a></td>
+              {% endif %}
+              {% if lst_third.4.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ lst_third.4.0|currency }} VNĐ">${{ lst_third..4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_third.4.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_third.4.2}}">  {{ lst_third.4.1 }}</a></td>
+              {% else %}
+              <td>
+                <div>{{ lst_third.4.0|currency }}
+                  {% if lst_third.4.5 %}
+                  <a data-toggle="popover" data-placement="top" data-content="{{ lst_third.4.5 }}"><i class="fas fa-exclamation-circle text-success"></i></a>
+                  {% endif %}
+                </div>
+              </td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_third.4.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_third.4.2}}">  {{ lst_third.4.1 }}</a></td>
+              {% endif %}
+              <td><a class="text-decoration-none" data-toggle="modal" href="#comvnModal">+ {{ lst_count.4 }} more</a></td>
+            </tr>
+            <tr>
+              <td class="font-weight-bolder m-3">.VN</td>
+              {% if lst_cheapest.5.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ lst_cheapest.5.0|currency }} VNĐ">${{ lst_cheapest.5.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_cheapest.5.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_cheapest.5.2}}">  {{ lst_cheapest.5.1 }}</a></td>
+              {% else %}
+              <td>
+                <div>{{ lst_cheapest.5.0|currency }}
+                  {% if lst_cheapest.5.5 %}
+                  <a data-toggle="popover" data-placement="top" data-content="{{ lst_cheapest.5.5 }}"><i class="fas fa-exclamation-circle text-success"></i></a>
+                  {% endif %}
+                </div>
+              </td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_cheapest.5.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_cheapest.5.2}}">  {{ lst_cheapest.5.1 }}</a></td>
+              {% endif %}
+              {% if lst_second.5.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ lst_second.5.0|currency }} VNĐ">${{ lst_second.5.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_second.5.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_second.5.2}}">  {{ lst_second.5.1 }}</a></td>
+              {% else %}
+              <td>
+                <div>{{ lst_second.5.0|currency }}
+                  {% if lst_second.5.5 %}
+                  <a data-toggle="popover" data-placement="top" data-content="{{ lst_second.5.5 }}"><i class="fas fa-exclamation-circle text-success"></i></a>
+                  {% endif %}
+                </div>
+              </td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_second.5.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_second.5.2}}">  {{ lst_second.5.1 }}</a></td>
+              {% endif %}
+              {% if lst_third.5.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ lst_third.5.0|currency }} VNĐ">${{ lst_third.5.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_third.5.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_third.5.2}}">  {{ lst_third.5.1 }}</a></td>
+              {% else %}
+              <td>
+                <div>{{ lst_third.5.0|currency }}
+                  {% if lst_third.5.5 %}
+                  <a data-toggle="popover" data-placement="top" data-content="{{ lst_third.5.5 }}"><i class="fas fa-exclamation-circle text-success"></i></a>
+                  {% endif %}
+                </div>
+              </td>
+              <td><a class="text-dark text-decoration-none" href="{{ lst_third.5.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{lst_third.5.2}}">  {{ lst_third.5.1 }}</a></td>
+              {% endif %}
+              <td><a class="text-decoration-none" data-toggle="modal" href="#vnModal">+ {{ lst_count.5 }} more</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-responsive-lg container tab-pane fade" id="renewTable">
+        <table class="table table-bordered">
+          <thead class="text-center">
+            <tr style="background-color: #00a3e6;">
+              <th></th>
+              <th colspan="2"><i class="fas fa-star mr-2" style="color: #e71c24;"></i>Cheapest</th>
+              <th colspan="2"><i class="fas fa-star mr-2" style="color: blue;"></i>Second</th>
+              <th colspan="2"><i class="fas fa-star mr-2" style="color: #febe0d;"></i>Third</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="font-weight-bolder m-1">.COM</td>
+              {% if ren_cheapest.0.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ ren_cheapest.0.0|currency }} VNĐ">${{ ren_cheapest.0.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_cheapest.0.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_cheapest.0.2}}">  {{ ren_cheapest.0.1 }}</a></td>
+              {% else %}
+              <td><div>{{ ren_cheapest.0.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_cheapest.0.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_cheapest.0.2}}">  {{ ren_cheapest.0.1 }}</a></td>
+              {% endif %}
+              {% if ren_second.0.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ ren_second.0.0|currency }} VNĐ">${{ ren_second.0.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_second.0.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_second.0.2}}">  {{ ren_second.0.1 }}</a></td>
+              {% else %}
+              <td><div>{{ ren_second.0.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_second.0.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_second.0.2}}">  {{ ren_second.0.1 }}</a></td>
+              {% endif %}
+              {% if ren_third.0.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ ren_third.0.0|currency }} VNĐ">${{ ren_third.0.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_third.0.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_third.0.2}}">  {{ ren_third.0.1 }}</a></td>
+              {% else %}
+              <td><div>{{ ren_third.0.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_third.0.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_third.0.2}}">  {{ ren_third.0.1 }}</a></td>
+              {% endif %}
+              <td><a class="text-decoration-none" data-toggle="modal" href="#comModalRenew">+ {{ ren_count.0 }} more</a></td>
+            <tr>
+              <td class="font-weight-bolder m-3">.NET</td>
+              {% if ren_cheapest.1.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ ren_cheapest.1.0|currency }} VNĐ">${{ ren_cheapest.1.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_cheapest.1.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_cheapest.1.2}}">  {{ ren_cheapest.1.1 }}</a></td>
+              {% else %}
+              <td><div>{{ ren_cheapest.1.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_cheapest.1.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_cheapest.1.2}}">  {{ ren_cheapest.1.1 }}</a></td>
+              {% endif %}
+              {% if ren_second.1.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ ren_second.1.0|currency }} VNĐ">$ {{ ren_second.1.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_second.1.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_second.1.2}}">  {{ ren_second.1.1 }}</a></td>
+              {% else %}
+              <td><div>{{ ren_second.1.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_second.1.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_second.1.2}}">  {{ ren_second.1.1 }}</a></td>
+              {% endif %}
+              {% if ren_third.1.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ ren_third.1.0|currency }} VNĐ">${{ ren_third.1.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_third.1.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_third.1.2}}">  {{ ren_third.1.1 }}</a></td>
+              {% else %}
+              <td><div>{{ ren_third.1.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_third.1.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_third.1.2}}">  {{ ren_third.1.1 }}</a></td>
+              {% endif %}
+              <td><a class="text-decoration-none" data-toggle="modal" href="#netModalRenew">+ {{ ren_count.1 }} more</a></td>
+            </tr>
+            <tr>
+              <td class="font-weight-bolder m-3">.ORG</td>
+              {% if ren_cheapest.2.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ ren_cheapest.2.0|currency }} VNĐ">${{ ren_cheapest.2.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_cheapest.2.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_cheapest.2.2}}">  {{ ren_cheapest.2.1 }}</a></td>
+              {% else %}
+              <td><div>{{ ren_cheapest.2.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_cheapest.2.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_cheapest.2.2}}">  {{ ren_cheapest.2.1 }}</a></td>
+              {% endif %}
+              {% if ren_second.2.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ ren_second.2.0|currency }} VNĐ">${{ ren_second.2.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_second.2.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_second.2.2}}">  {{ ren_second.2.1 }}</a></td>
+              {% else %}
+              <td><div>{{ ren_second.2.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_second.2.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_second.2.2}}">  {{ ren_second.2.1 }}</a></td>
+              {% endif %}
+              {% if ren_third.2.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ ren_third.2.0|currency }} VNĐ">${{ ren_third.2.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_third.2.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_third.2.2}}">  {{ ren_third.2.1 }}</a></td>
+              {% else %}
+              <td><div>{{ ren_third.2.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_third.2.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_third.2.2}}">  {{ ren_third.2.1 }}</a></td>
+              {% endif %}
+              <td><a class="text-decoration-none" data-toggle="modal" href="#orgModalRenew">+ {{ ren_count.2 }} more</a></td>
+            </tr>
+            <tr>
+              <td class="font-weight-bolder m-3">.INFO</td>
+              {% if ren_cheapest.3.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ ren_cheapest.3.0|currency }} VNĐ">${{ ren_cheapest.3.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_cheapest.3.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_cheapest.3.2}}">  {{ ren_cheapest.3.1 }}</a></td>
+              {% else %}
+              <td><div>{{ ren_cheapest.3.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_cheapest.3.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_cheapest.3.2}}">  {{ ren_cheapest.3.1 }}</a></td>
+              {% endif %}
+              {% if ren_second.3.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ ren_second.3.0|currency }} VNĐ">${{ ren_second.3.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_second.3.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_second.3.2}}">  {{ ren_second.3.1 }}</a></td>
+              {% else %}
+              <td><div>{{ ren_second.3.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_second.3.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_second.3.2}}">  {{ ren_second.3.1 }}</a></td>
+              {% endif %}
+              {% if ren_third.3.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ ren_third.3.0|currency }} VNĐ">${{ ren_third.3.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_third.3.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_third.3.2}}">  {{ ren_third.3.1 }}</a></td>
+              {% else %}
+              <td><div>{{ ren_third.3.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_third.3.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_third.3.2}}">  {{ ren_third.3.1 }}</a></td>
+              {% endif %}
+              <td><a class="text-decoration-none" data-toggle="modal" href="#infoModalRenew">+ {{ ren_count.3 }} more</a></td>
+            </tr>
+            <tr>
+              <td class="font-weight-bolder m-3">.COM.VN</td>
+              {% if ren_cheapest.4.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ ren_cheapest.4.0|currency }} VNĐ">${{ ren_cheapest.4.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_cheapest.4.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_cheapest.4.2}}">  {{ ren_cheapest.4.1 }}</a></td>
+              {% else %}
+              <td><div>{{ ren_cheapest.4.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_cheapest.4.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_cheapest.4.2}}">  {{ ren_cheapest.4.1 }}</a></td>
+              {% endif %}
+              {% if ren_second.4.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ ren_second.4.0|currency }} VNĐ">${{ ren_second.4.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_second.2.4 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_second.4.2}}">  {{ ren_second.4.1 }}</a></td>
+              {% else %}
+              <td><div>{{ ren_second.4.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_second.4.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_second.4.2}}">  {{ ren_second.4.1 }}</a></td>
+              {% endif %}
+              {% if ren_third.4.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ ren_third.4.0|currency }} VNĐ">${{ ren_third.4.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_third.4.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_third.4.2}}">  {{ ren_third.4.1 }}</a></td>
+              {% else %}
+              <td><div>{{ ren_third.4.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_third.4.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_third.4.2}}">  {{ ren_third.4.1 }}</a></td>
+              {% endif %}
+              <td><a class="text-decoration-none" data-toggle="modal" href="#comvnModalRenew">+ {{ ren_count.4 }} more</a></td>
+            </tr>
+            <tr>
+              <td class="font-weight-bolder m-3">.VN</td>
+              {% if ren_cheapest.5.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ ren_cheapest.5.0|currency }} VNĐ">${{ ren_cheapest.5.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_cheapest.5.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_cheapest.5.2}}">  {{ ren_cheapest.5.1 }}</a></td>
+              {% else %}
+              <td><div>{{ ren_cheapest.5.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_cheapest.5.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_cheapest.5.2}}">  {{ ren_cheapest.5.1 }}</a></td>
+              {% endif %}
+              {% if ren_second.5.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ ren_second.5.0|currency }} VNĐ">${{ ren_second.5.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_second.5.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_second.5.2}}">  {{ ren_second.5.1 }}</a></td>
+              {% else %}
+              <td><div>{{ ren_second.5.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_second.5.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_second.5.2}}">  {{ ren_second.5.1 }}</a></td>
+              {% endif %}
+              {% if ren_third.5.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ ren_third.5.0|currency }} VNĐ">${{ ren_third.5.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_third.5.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_third.5.2}}">  {{ ren_third.5.1 }}</a></td>
+              {% else %}
+              <td><div>{{ ren_third.5.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ ren_third.5.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ren_third.5.2}}">  {{ ren_third.5.1 }}</a></td>
+              {% endif %}
+              <td><a class="text-decoration-none" data-toggle="modal" href="#vnModalRenew">+ {{ ren_count.5 }} more</a></td>
+            </tr>
+          </tbody>
+
+        </table>    
+      </div>
+      <div class="table-responsive-lg container tab-pane fade" id="transTable">
+        <table class="table table-bordered">
+          <thead class="text-center">
+            <tr style="background-color: #00a3e6;">
+              <th></th>
+              <th colspan="2"><i class="fas fa-star mr-2" style="color: #e71c24;"></i>Cheapest</th>
+              <th colspan="2"><i class="fas fa-star mr-2" style="color: blue;"></i>Second</th>
+              <th colspan="2"><i class="fas fa-star mr-2" style="color: #febe0d;"></i>Third</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="font-weight-bolder m-1">.COM</td>
+              {% if trans_cheapest.0.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ trans_cheapest.0.0|currency }} VNĐ">${{ trans_cheapest.0.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_cheapest.0.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_cheapest.0.2}}">  {{ trans_cheapest.0.1 }}</a></td>
+              {% else %}
+              <td><div>{{ trans_cheapest.0.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_cheapest.0.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_cheapest.0.2}}">  {{ trans_cheapest.0.1 }}</a></td>
+              {% endif %}
+              {% if trans_second.0.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ trans_second.0.0|currency }} VNĐ">${{ trans_second.0.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_second.0.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_second.0.2}}">  {{ trans_second.0.1 }}</a></td>
+              {% else %}
+              <td><div>{{ trans_second.0.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_second.0.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_second.0.2}}">  {{ trans_second.0.1 }}</a></td>
+              {% endif %}
+              {% if trans_third.0.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ trans_third.0.0|currency }} VNĐ">${{ trans_third.0.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_third.0.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_third.0.2}}">  {{ trans_third.0.1 }}</a></td>
+              {% else %}
+              <td><div>{{ trans_third.0.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_third.0.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_third.0.2}}">  {{ trans_third.0.1 }}</a></td>
+              {% endif %}
+              <td><a class="text-decoration-none" data-toggle="modal" href="#comModalTrans">+ {{ trans_count.0 }} more</a></td>
+            <tr>
+              <td class="font-weight-bolder m-3">.NET</td>
+              {% if trans_cheapest.1.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ trans_cheapest.1.0|currency }} VNĐ">${{ trans_cheapest.1.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_cheapest.1.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_cheapest.1.2}}">  {{ trans_cheapest.1.1 }}</a></td>
+              {% else %}
+              <td><div>{{ trans_cheapest.1.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_cheapest.1.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_cheapest.1.2}}">  {{ trans_cheapest.1.1 }}</a></td>
+              {% endif %}
+              {% if trans_second.1.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ trans_second.1.0|currency }} VNĐ">$ {{ trans_second.1.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_second.1.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_second.1.2}}">  {{ trans_second.1.1 }}</a></td>
+              {% else %}
+              <td><div>{{ trans_second.1.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_second.1.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_second.1.2}}">  {{ trans_second.1.1 }}</a></td>
+              {% endif %}
+              {% if trans_third.1.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ trans_third.1.0|currency }} VNĐ">${{ trans_third.1.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_third.1.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_third.1.2}}">  {{ trans_third.1.1 }}</a></td>
+              {% else %}
+              <td><div>{{ trans_third.1.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_third.1.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_third.1.2}}">  {{ trans_third.1.1 }}</a></td>
+              {% endif %}
+              <td><a class="text-decoration-none" data-toggle="modal" href="#netModalTrans">+ {{ trans_count.1 }} more</a></td>
+            </tr>
+            <tr>
+              <td class="font-weight-bolder m-3">.ORG</td>
+              {% if trans_cheapest.2.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ trans_cheapest.2.0|currency }} VNĐ">${{ trans_cheapest.2.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_cheapest.2.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_cheapest.2.2}}">  {{ trans_cheapest.2.1 }}</a></td>
+              {% else %}
+              <td><div>{{ trans_cheapest.2.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_cheapest.2.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_cheapest.2.2}}">  {{ trans_cheapest.2.1 }}</a></td>
+              {% endif %}
+              {% if trans_second.2.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ trans_second.2.0|currency }} VNĐ">${{ trans_second.2.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_second.2.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_second.2.2}}">  {{ trans_second.2.1 }}</a></td>
+              {% else %}
+              <td><div>{{ trans_second.2.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_second.2.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_second.2.2}}">  {{ trans_second.2.1 }}</a></td>
+              {% endif %}
+              {% if trans_third.2.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ trans_third.2.0|currency }} VNĐ">${{ trans_third.2.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_third.2.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_third.2.2}}">  {{ trans_third.2.1 }}</a></td>
+              {% else %}
+              <td><div>{{ trans_third.2.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_third.2.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_third.2.2}}">  {{ trans_third.2.1 }}</a></td>
+              {% endif %}
+              <td><a class="text-decoration-none" data-toggle="modal" href="#orgModalTrans">+ {{ trans_count.2 }} more</a></td>
+            </tr>
+            <tr>
+              <td class="font-weight-bolder m-3">.INFO</td>
+              {% if trans_cheapest.3.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ trans_cheapest.3.0|currency }} VNĐ">${{ trans_cheapest.3.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_cheapest.3.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_cheapest.3.2}}">  {{ trans_cheapest.3.1 }}</a></td>
+              {% else %}
+              <td><div>{{ trans_cheapest.3.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_cheapest.3.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_cheapest.3.2}}">  {{ trans_cheapest.3.1 }}</a></td>
+              {% endif %}
+              {% if trans_second.3.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ trans_second.3.0|currency }} VNĐ">${{ trans_second.3.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_second.3.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_second.3.2}}">  {{ trans_second.3.1 }}</a></td>
+              {% else %}
+              <td><div>{{ trans_second.3.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_second.3.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_second.3.2}}">  {{ trans_second.3.1 }}</a></td>
+              {% endif %}
+              {% if trans_third.3.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ trans_third.3.0|currency }} VNĐ">${{ trans_third.3.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_third.3.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_third.3.2}}">  {{ trans_third.3.1 }}</a></td>
+              {% else %}
+              <td><div>{{ trans_third.3.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_third.3.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_third.3.2}}">  {{ trans_third.3.1 }}</a></td>
+              {% endif %}
+              <td><a class="text-decoration-none" data-toggle="modal" href="#infoModalTrans">+ {{ trans_count.3 }} more</a></td>
+            </tr>
+            <tr>
+              <td class="font-weight-bolder m-3">.COM.VN</td>
+              {% if trans_cheapest.4.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ trans_cheapest.4.0|currency }} VNĐ">${{ trans_cheapest.4.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_cheapest.4.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_cheapest.4.2}}">  {{ trans_cheapest.4.1 }}</a></td>
+              {% else %}
+              <td><div>{{ trans_cheapest.4.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_cheapest.4.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_cheapest.4.2}}">  {{ trans_cheapest.4.1 }}</a></td>
+              {% endif %}
+              {% if trans_second.4.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ trans_second.4.0|currency }} VNĐ">${{ trans_second.4.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_second.2.4 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_second.4.2}}">  {{ trans_second.4.1 }}</a></td>
+              {% else %}
+              <td><div>{{ trans_second.4.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_second.4.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_second.4.2}}">  {{ trans_second.4.1 }}</a></td>
+              {% endif %}
+              {% if trans_third.4.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ trans_third.4.0|currency }} VNĐ">${{ trans_third.4.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_third.4.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_third.4.2}}">  {{ trans_third.4.1 }}</a></td>
+              {% else %}
+              <td><div>{{ trans_third.4.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_third.4.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_third.4.2}}">  {{ trans_third.4.1 }}</a></td>
+              {% endif %}
+              <td><a class="text-decoration-none" data-toggle="modal" href="#comvnModalTrans">+ {{ trans_count.4 }} more</a></td>
+            </tr>
+            <tr>
+              <td class="font-weight-bolder m-3">.VN</td>
+              {% if trans_cheapest.5.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ trans_cheapest.5.0|currency }} VNĐ">${{ trans_cheapest.5.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_cheapest.5.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_cheapest.5.2}}">  {{ trans_cheapest.5.1 }}</a></td>
+              {% else %}
+              <td><div>{{ trans_cheapest.5.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_cheapest.5.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_cheapest.5.2}}">  {{ trans_cheapest.5.1 }}</a></td>
+              {% endif %}
+              {% if trans_second.5.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ trans_second.5.0|currency }} VNĐ">${{ trans_second.5.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_second.5.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_second.5.2}}">  {{ trans_second.5.1 }}</a></td>
+              {% else %}
+              <td><div>{{ trans_second.5.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_second.5.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_second.5.2}}">  {{ trans_second.5.1 }}</a></td>
+              {% endif %}
+              {% if trans_third.5.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ trans_third.5.0|currency }} VNĐ">${{ trans_third.5.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_third.5.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_third.5.2}}">  {{ trans_third.5.1 }}</a></td>
+              {% else %}
+              <td><div>{{ trans_third.5.0|currency }}</div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ trans_third.5.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{trans_third.5.2}}">  {{ trans_third.5.1 }}</a></td>
+              {% endif %}
+              <td><a class="text-decoration-none" data-toggle="modal" href="#vnModalTrans">+ {{ trans_count.5 }} more</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="comModal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title mx-auto font-weight-bolder">.COM</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <tr class="bg-primary text-white">
+              <th>Giá</th>
+              <th>Nhà cung cấp</th>
+            </tr>
+            {% for x in lst_other.0 %}
+            <tr>
+              {% if x.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ x.0|currency }} VNĐ">${{ x.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% else %}
+              <td>
+                <div>{{ x.0|currency }}
+                  {% if x.5 %}
+                  <a data-toggle="popover" data-placement="top" data-content="{{ x.5 }}"><i class="fas fa-exclamation-circle text-success"></i></a>
+                  {% endif %}
+                </div>
+              </td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="netModal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title mx-auto font-weight-bolder">.NET</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <tr class="bg-primary text-white">
+              <th>Giá</th>
+              <th>Nhà cung cấp</th>
+            </tr>
+            {% for x in lst_other.1 %}
+            <tr>
+              {% if x.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ x.0|currency }} VNĐ">${{ x.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% else %}
+              <td>{{ x.0|currency }}
+                {% if x.5 %}
+                <a data-toggle="popover" data-placement="top" data-content="{{ x.5 }}"><i class="fas fa-exclamation-circle text-success"></i></a>
+                {% endif %}
+              </td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="orgModal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title mx-auto font-weight-bolder">.ORG</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <tr class="bg-primary text-white">
+              <th>Giá</th>
+              <th>Nhà cung cấp</th>
+            </tr>
+            {% for x in lst_other.2 %}
+            <tr>
+              {% if x.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ x.0|currency }} VNĐ">${{ x.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% else %}
+              <td>{{ x.0|currency }}
+                {% if x.5 %}
+                <a data-toggle="popover" data-placement="top" data-content="{{ x.5 }}"><i class="fas fa-exclamation-circle text-success"></i></a>
+                {% endif %}
+              </td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="infoModal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title mx-auto font-weight-bolder">.INFO</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <tr class="bg-primary text-white">
+              <th>Giá</th>
+              <th>Nhà cung cấp</th>
+            </tr>
+            {% for x in lst_other.3 %}
+            <tr>
+              {% if x.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ x.0|currency }} VNĐ">${{ x.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% else %}
+              <td>{{ x.0|currency }}
+                {% if x.5 %}
+                <a data-toggle="popover" data-placement="top" data-content="{{ x.5 }}"><i class="fas fa-exclamation-circle text-success"></i></a>
+                {% endif %}
+              </td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="comvnModal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title mx-auto font-weight-bolder">.COM.VN</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <tr class="bg-primary text-white">
+              <th>Giá</th>
+              <th>Nhà cung cấp</th>
+            </tr>
+            {% for x in lst_other.4 %}
+            <tr>
+              {% if x.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ x.0|currency }} VNĐ">${{ x.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% else %}
+              <td>{{ x.0|currency }}
+                {% if x.5 %}
+                <a data-toggle="popover" data-placement="top" data-content="{{ x.5 }}"><i class="fas fa-exclamation-circle text-success"></i></a>
+                {% endif %}
+              </td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="vnModal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title mx-auto font-weight-bolder">.VN</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <tr class="bg-primary text-white">
+              <th>Giá</th>
+              <th>Nhà cung cấp</th>
+            </tr>
+            {% for x in lst_other.5 %}
+            <tr>
+              {% if x.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ x.0|currency }} VNĐ">${{ x.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% else %}
+              <td>{{ x.0|currency }}
+                {% if x.5 %}
+                <a data-toggle="popover" data-placement="top" data-content="{{ x.5 }}"><i class="fas fa-exclamation-circle text-success"></i></a>
+                {% endif %}
+              </td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="comModalRenew">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title mx-auto font-weight-bolder">.COM</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <tr class="bg-primary text-white">
+              <th>Giá</th>
+              <th>Nhà cung cấp</th>
+            </tr>
+            {% for x in ren_other.0 %}
+            <tr>
+              {% if x.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ x.0|currency }} VNĐ">${{ x.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% else %}
+              <td>{{ x.0|currency }}</td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="netModalRenew">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title mx-auto font-weight-bolder">.NET</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <tr class="bg-primary text-white">
+              <th>Giá</th>
+              <th>Nhà cung cấp</th>
+            </tr>
+            {% for x in ren_other.1 %}
+            <tr>
+              {% if x.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ x.0|currency }} VNĐ">${{ x.4|currency }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% else %}
+              <td>{{ x.0|currency }}</td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="orgModalRenew">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title mx-auto font-weight-bolder">.ORG</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <tr class="bg-primary text-white">
+              <th>Giá</th>
+              <th>Nhà cung cấp</th>
+            </tr>
+            {% for x in ren_other.2 %}
+            <tr>
+              {% if x.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ x.0|currency }} VNĐ">${{ x.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% else %}
+              <td>{{ x.0|currency }}</td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="infoModalRenew">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title mx-auto font-weight-bolder">.INFO</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <tr class="bg-primary text-white">
+              <th>Giá</th>
+              <th>Nhà cung cấp</th>
+            </tr>
+            {% for x in ren_other.3 %}
+            <tr>
+              {% if x.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ x.0|currency }} VNĐ">${{ x.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% else %}
+              <td>{{ x.0|currency }}</td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="comvnModalRenew">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title mx-auto font-weight-bolder">.COM.VN</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <tr class="bg-primary text-white">
+              <th>Giá</th>
+              <th>Nhà cung cấp</th>
+            </tr>
+            {% for x in ren_other.4 %}
+            <tr>
+              {% if x.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ x.0|currency }} VNĐ">${{ x.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% else %}
+              <td>{{ x.0|currency }}</td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="vnModalRenew">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title mx-auto font-weight-bolder">.VN</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <tr class="bg-primary text-white">
+              <th>Giá</th>
+              <th>Nhà cung cấp</th>
+            </tr>
+            {% for x in ren_other.5 %}
+            <tr>
+              {% if x.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ x.0|currency }} VNĐ">${{ x.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% else %}
+              <td>{{ x.0|currency }}</td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="comModalTrans">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title mx-auto font-weight-bolder">.COM</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <tr class="bg-primary text-white">
+              <th>Giá</th>
+              <th>Nhà cung cấp</th>
+            </tr>
+            {% for x in trans_other.0 %}
+            <tr>
+              {% if x.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ x.0|currency }} VNĐ">${{ x.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% else %}
+              <td>{{ x.0|currency }}</td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="netModalTrans">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title mx-auto font-weight-bolder">.NET</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <tr class="bg-primary text-white">
+              <th>Giá</th>
+              <th>Nhà cung cấp</th>
+            </tr>
+            {% for x in trans_other.1 %}
+            <tr>
+              {% if x.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ x.0|currency }} VNĐ">${{ x.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% else %}
+              <td>{{ x.0|currency }}</td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="orgModalTrans">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title mx-auto font-weight-bolder">.ORG</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <tr class="bg-primary text-white">
+              <th>Giá</th>
+              <th>Nhà cung cấp</th>
+            </tr>
+            {% for x in trans_other.2 %}
+            <tr>
+              {% if x.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ x.0|currency }} VNĐ">${{ x.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% else %}
+              <td>{{ x.0|currency }}</td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="infoModalTrans">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title mx-auto font-weight-bolder">.INFO</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <tr class="bg-primary text-white">
+              <th>Giá</th>
+              <th>Nhà cung cấp</th>
+            </tr>
+            {% for x in trans_other.3 %}
+            <tr>
+              {% if x.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ x.0|currency }} VNĐ">${{ x.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% else %}
+              <td>{{ x.0|currency }}</td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="comvnModalTrans">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title mx-auto font-weight-bolder">.COM.VN</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <tr class="bg-primary text-white">
+              <th>Giá</th>
+              <th>Nhà cung cấp</th>
+            </tr>
+            {% for x in trans_other.4 %}
+            <tr>
+              {% if x.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ x.0|currency }} VNĐ">${{ x.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% else %}
+              <td>{{ x.0|currency }}</td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="vnModalTrans">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title mx-auto font-weight-bolder">.VN</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <tr class="bg-primary text-white">
+              <th>Giá</th>
+              <th>Nhà cung cấp</th>
+            </tr>
+            {% for x in trans_other.5 %}
+            <tr>
+              {% if x.4 %}
+              <td><div><a class="text-dark" href="javascript:void(0);" data-toggle="tooltip" title="{{ x.0|currency }} VNĐ">${{ x.4 }}</a></div></td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% else %}
+              <td>{{ x.0|currency }}</td>
+              <td><a class="text-dark text-decoration-none" href="{{ x.3 }}"><img class="mr-1" width="15%" src="{% get_static_prefix %}{{ x.2 }}">  {{ x.1 }}</a></td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container col-md-8 text-center">
+    <p class="font-italic m-1">
+      <br>Giá đã bao gồm VAT hoặc phí ICANN nếu có.
+      <br>Nhấn vào biểu tượng <i class="fas fa-exclamation-circle text-success"></i> để xem thông tin chi tiết.
+      <br>Di chuột qua giá USD để quy đổi sang giá VND
+    <p>
+    <!-- <p class="mb-3"><b>Sử dụng ô Tìm kiếm</b> để xem thêm, loại tên miền gì cũng có.</p> -->
+  </div>
+  <script>
+    
+  </script>
+{% endblock %}

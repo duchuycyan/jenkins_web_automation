@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="utf-8">
+  <title>Bảng giá {% block title %}{% endblock %}</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicons -->
+  <link href="{% static 'img/favicon_supportdao.png' %}" rel="icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Bootstrap CSS File -->
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+  <!-- Libraries CSS Files -->
+  <link href="{% static 'lib/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/ionicons/css/ionicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet">
+
+
+  
+  <!-- Main Stylesheet File -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+  <!-- Custom JavaScript -->
+  <script src="{% static 'js/custom.js' %}"></script>
+  
+</head>
+
+<body>
+
+  <header id="header" class="fixed-top">
+    <div class="container">
+      <div class="float-left">
+        <a href="{%url 'domain'%}" class="scrollto"><img src="{% static 'img/logo_new.png' %}" alt="" class="img-fluid pb-1"></a>
+      </div>
+      <nav class="main-nav float-right d-none d-lg-block">
+        <ul>
+          <li class="active"><a href="{%url 'domain'%}"><i class="fa fa-fw fa-home"></i> Trang chủ</a></li>
+          <li><a href="https://news.cloud365.vn/"><i class="far fa-newspaper"></i> Tin tức công nghệ</a></li>
+          <li><div class="btn btn-primary btn-sm"><a href="{%url 'admin:index'%}" class="text-white"><i class="fa fa-sign-in"></i>  Đăng nhập</a></div></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section id="intro" class="clearfix">
+    <div class="container text-center">
+      <div class="intro-info">
+        <h2>Bảng giá<br>Domain - Hosting - SSL</h2>
+      </div>
+    </div>
+  </section>
+
+  <main id="main">
+    <!-- <nav class="navbar navbar-expand-sm bg-primary justify-content-center">
+      <ul class="navbar-nav mb-1" id="nav">
+        <li class="nav-item ml-4 mr-4">
+          <a class="nav-link text-white font-weight-bold" href="{%url 'domain'%}">Domain</a>
+        </li>
+        <li class="nav-item ml-4 mr-4">
+          <a class="nav-link text-white font-weight-bold" href="{%url 'hosting'%}">Hosting</a>
+        </li>
+        <li class="nav-item ml-4 mr-4">
+          <a class="nav-link text-white font-weight-bold" href="{%url 'vps'%}">VPS</a>
+        </li>
+        <li class="nav-item ml-4 mr-4">
+          <a class="nav-link text-white font-weight-bold" href="{%url 'ssl'%}">SSL</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="clearfix" id="bell">
+      <div class="float-sm-left">
+        <button id="button-bell" type="button" class="btn btn-light btn-lg rounded-circle">
+          <a href="#">
+            <i class="fas fa-bell text-danger"></i>
+          </a>
+        </button>
+      </div>
+    </div> -->
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 mb-4">
+            <h4>Giới thiệu về SUPPORT DẠO</h4>
+            <p><strong>Nhân Hòa</strong> là thương hiệu hàng đầu Việt Nam hoạt động chuyên sâu trong các lĩnh vực công nghệ thông tin: 
+              Nhà đăng kí tên miền Quốc gia và Quốc tế, dịch vụ Hosting - lưu trữ website, SSL - Bảo mật website, dịch vụ cho thuê máy chủ, server, phần mềm…</p>
+            <img class="w-60" src="{% static 'img/logo_supportdao.png' %}">
+          </div>
+          <div class="col-lg-4 col-md-6 mb-5">
+            <h4>Tin tức hữu ích</h4>
+            <ul class="clearfix">
+              <li class="mb-2"><a href="https://nhanhoa.com/tuyen-dung.html">Tuyển dụng</a></li>
+              <li class="mb-5"><a href="https://nhanhoa.com/lien-he.html">Liên hệ</a></li>
+              <h4 class="mb-2">Nhân Hòa App</h4>
+              <a href="https://apps.apple.com/vn/app/nh%C3%A2n-ho%C3%A0/id1469246570"><img style="width:120px" src="https://nhanhoa.com/templates/images/app-store.png" alt=""></a>
+              <a href="https://play.google.com/store/apps/details?id=com.nh.domain&hl=vi"><img style="width:120px" src="https://nhanhoa.com/templates/images/google-play.png" alt=""></a>
+              <!-- <h4 class="mb-2">ĐĂNG KÝ NHẬN THÔNG TIN</h4> -->
+              <!-- <form action="#">
+                <div class="form-inline">
+                  <input type="email" class="form-control-sm" placeholder="Enter email" id="email"><button type="submit" class="btn btn-sm btn-primary">Subcribe</button>
+                </div>
+              </form> -->
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-6 mb-5">
+            <h4>Liên hệ chúng tôi</h4>
+            <ul class="clearfix">
+              <li><strong>Trụ sở Hà Nội :</strong> 32 Võ Văn Dũng, Đống Đa, Hà Nội <a class="text-warning" data-toggle="modal" href="#mapHN"> (xem bản đồ <i class="fas fa-map-marked-alt"></i>)</a></li>
+              <li>Tel: (024) 7308 6680</li>
+              <li>Email: sales@nhanhoa.com</li>
+            </ul>
+            <ul class="my-3 clearfix">
+              <li><strong>Chi nhánh HCM :</strong> 270 Cao Thắng (nối dài), Phường 12, Quận 10, TP.HCM <a class="text-warning" data-toggle="modal" href="#mapHCM">(xem bản đồ <i class="fas fa-map-marked-alt"></i>)</a></li>
+              <li>Tel: (028) 7308 6680</li>
+              <li>Email: sales@nhanhoa.com</li>
+            </ul>
+            <div class="social-links">
+              <a href="https://www.facebook.com/nhanhoacom" class="facebook"><i class="fa fa-facebook"></i></a>
+              <a href="https://twitter.com/nhanhoacom" class="twitter"><i class="fa fa-twitter"></i></a>
+              <!-- <a href="#" class="instagram"><i class="fa fa-instagram"></i></a> -->
+              <a href="https://www.youtube.com/channel/UCB_gZGsKMNdPCkDyu-mEsAQ" class="youtube"><i class="fab fa-youtube"></i></a>
+              <!-- <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a> -->
+              <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.424244414298!2d105.8219083147631!3d21.015704386005467!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135abc4dfdce589%3A0x6f153a1f6f69c9fd!2zQ8O0bmcgdHkgVE5ISCBQaOG6p24gbeG7gW0gTmjDom4gSMOyYQ!5e0!3m2!1sen!2s!4v1583605186916!5m2!1sen!2s" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- The Modal -->
+    <!-- <div class="modal fade" id="mapHN">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="background-color: transparent; border:0">
+          <div class="modal-body">
+            <iframe class="mx-auto" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.424244414298!2d105.8219083147631!3d21.015704386005467!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135abc4dfdce589%3A0x6f153a1f6f69c9fd!2zQ8O0bmcgdHkgVE5ISCBQaOG6p24gbeG7gW0gTmjDom4gSMOyYQ!5e0!3m2!1sen!2s!4v1583605186916!5m2!1sen!2s" width="100%" height="500" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="mapHCM">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="background-color: transparent; border:0">
+          <div class="modal-body">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4746224275636!2d106.67330781462245!3d10.774914192322546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752ed8b9f8ae4f%3A0x1a6f65f1ee1fdb9b!2zQ8O0bmcgdHkgVE5ISCBQaOG6p24gbeG7gW0gTmjDom4gSG_DoA!5e0!3m2!1sen!2s!4v1583605980418!5m2!1sen!2s" width="100%" height="500" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="container">
+        <div class="copyright">
+          &copy; Copyright <a class="text-white" href="https://nhanhoa.com/"><strong> Nhan Hoa Software Company</strong></a> 2020 . All Rights Reserved
+        </div>
+      </div>
+    </div> -->
+  </footer>
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+  
+  <!-- JavaScript Libraries -->
+  <script src="{% static 'lib/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'lib/jquery/jquery-migrate.min.js' %}"></script>
+  <script src="{% static 'lib/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+  <script src="{% static 'lib/mobile-nav/mobile-nav.js' %}"></script>
+  <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+  <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+  <script src="{% static 'lib/counterup/counterup.min.js' %}"></script>
+  <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'lib/isotope/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'lib/lightbox/js/lightbox.min.js' %}"></script>
+  <link href="{% static 'css/jquery-ui.css' %}" rel="stylesheet">
+  
+  {% block javascript %}
+  {% endblock %}
+  
+  <!-- Template Main Javascript File -->
+  <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>

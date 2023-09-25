@@ -1,0 +1,211 @@
+{% extends "domain/base.html" %}
+
+{% block title %}VPS{% endblock %}
+
+{% block content %}
+{% load static %}
+{% load custom_filter %}
+  <div class="container col-sm-6 col-lg-6 text-center mx-auto mt-5 justify-content-center">
+    <h3 class="text-primary m-4 font-weight-bolder">Bảng giá Cloud VPS</h3>
+    <p>Tổng hợp bảng giá Cloud VPS của các nhà cung cấp lớn ở Việt Nam và trên thế giới,
+      giúp bạn thuê được VPS rẻ nhất, tiết kiệm nhất.</p>
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary font-weight-bolder">NCC Trong nước</button>
+      <button type="button" class="btn btn-primary font-weight-bolder">NCC Quốc tế</button>
+    </div>
+    <form>
+      <select name="cars" class="custom-select mt-3 w-25">
+        <option value="1">1 tháng</option>
+        <option selected value="3">3 tháng</option>
+        <option value="6">6 tháng</option>
+        <option value="12">12 tháng</option>
+      </select>
+    </form>
+  </div>
+  <div class="container clearfix">
+    <div class="col-sm-8 col-lg-12 mx-auto mt-5 float-left">
+      <div class="container">
+        <div class="table-responsive-lg">
+          <table class="table" id="dataTable">
+            <thead>
+              <tr style="background-color: #00a3e6;">
+                {% if val == None %}
+                <th>Nhà cung cấp</th>
+                <th class="text-center">Tên gói</th>
+                <th>Giá (VND)</th>
+                <th>vCPU (Cores) <a href="{% url 'vps' %}?sort=vcpu-desc"><i class="fas fa-sort ml-2"></i></a></th>
+                <th>SSD (GB) <a href="{% url 'vps' %}?sort=ssd-desc"><i class="fas fa-sort ml-2"></i></a></th>
+                <th>RAM (GB) <a href="{% url 'vps' %}?sort=ram-desc"><i class="fas fa-sort ml-2"></i></a></th>
+                <th></th>
+                {% elif val == 'vcpu-asc' %}
+                <th>Nhà cung cấp</th>
+                <th class="text-center">Tên gói</th>
+                <th>Giá (VND)</th>
+                <th>vCPU (Cores) <a href="{% url 'vps' %}?sort=vcpu-desc"><i class="fas fa-sort ml-2"></i></a></th>
+                <th>SSD (GB) <a href="{% url 'vps' %}?sort=ssd-desc"><i class="fas fa-sort ml-2"></i></a></th>
+                <th>RAM (GB) <a href="{% url 'vps' %}?sort=ram-desc"><i class="fas fa-sort ml-2"></i></a></th>
+                <th></th>
+                {% elif val == 'vcpu-desc' %}
+                <th>Nhà cung cấp</th>
+                <th class="text-center">Tên gói</th>
+                <th>Giá (VND)</th>
+                <th>vCPU (Cores) <a href="{% url 'vps' %}?sort=vcpu-asc"><i class="fas fa-sort ml-2"></i></a></th>
+                <th>SSD (GB) <a href="{% url 'vps' %}?sort=ssd-desc"><i class="fas fa-sort ml-2"></i></a></th>
+                <th>RAM (GB) <a href="{% url 'vps' %}?sort=ram-desc"><i class="fas fa-sort ml-2"></i></a></th>
+                <th></th>
+                {% elif val == 'ssd-asc' %}
+                <th>Nhà cung cấp</th>
+                <th class="text-center">Tên gói</th>
+                <th>Giá (VND)</th>
+                <th>vCPU (Cores) <a href="{% url 'vps' %}?sort=vcpu-desc"><i class="fas fa-sort ml-2"></i></a></th>
+                <th>SSD (GB) <a href="{% url 'vps' %}?sort=ssd-desc"><i class="fas fa-sort ml-2"></i></a></th>
+                <th>RAM (GB) <a href="{% url 'vps' %}?sort=ram-desc"><i class="fas fa-sort ml-2"></i></a></th>
+                <th></th>
+                {% elif val == 'ssd-desc' %}
+                <th>Nhà cung cấp</th>
+                <th class="text-center">Tên gói</th>
+                <th>Giá (VND)</th>
+                <th>vCPU (Cores) <a href="{% url 'vps' %}?sort=vcpu-desc"><i class="fas fa-sort ml-2"></i></a></th>
+                <th>SSD (GB) <a href="{% url 'vps' %}?sort=ssd-asc"><i class="fas fa-sort ml-2"></i></a></th>
+                <th>RAM (GB) <a href="{% url 'vps' %}?sort=ram-desc"><i class="fas fa-sort ml-2"></i></a></th>
+                <th></th>
+                {% elif val == 'ram-asc' %}
+                <th>Nhà cung cấp</th>
+                <th class="text-center">Tên gói</th>
+                <th>Giá (VND)</th>
+                <th>vCPU (Cores) <a href="{% url 'vps' %}?sort=vcpu-desc"><i class="fas fa-sort ml-2"></i></a></th>
+                <th>SSD (GB) <a href="{% url 'vps' %}?sort=ssd-desc"><i class="fas fa-sort ml-2"></i></a></th>
+                <th>RAM (GB) <a href="{% url 'vps' %}?sort=ram-desc"><i class="fas fa-sort ml-2"></i></a></th>
+                <th></th>
+                {% elif val == 'ram-desc' %}
+                <th>Nhà cung cấp</th>
+                <th class="text-center">Tên gói</th>
+                <th>Giá (VND)</th>
+                <th>vCPU (Cores) <a href="{% url 'vps' %}?sort=vcpu-desc"><i class="fas fa-sort ml-2"></i></a></th>
+                <th>SSD (GB) <a href="{% url 'vps' %}?sort=ssd-desc"><i class="fas fa-sort ml-2"></i></a></th>
+                <th>RAM (GB) <a href="{% url 'vps' %}?sort=ram-asc"><i class="fas fa-sort ml-2"></i></a></th>
+                <th></th>
+                {% endif %}
+              </tr style="border-bottom:  #7ca135;">
+            </thead>
+            <tbody>
+              {% for x in list_pack %}
+              <tr>
+                <td class="font-weight-bolder m-3"><a class="text-dark text-decoration-none" href="{{ x.2 }}"><img class="mr-1" width="10%" src="{% get_static_prefix %}{{ x.1 }}">  {{ x.0 }}</a></td>
+                <td><div class="btn btn-sm btn-primary btn-block">{{ x.3 }}</div></td>
+                <td>{{ x.4 | currency }}</td>
+                <td>{{ x.5 }}</td>
+                <td>{{ x.6 }}</td>
+                <td>{{ x.7 | ram }}</td>
+                <td></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col-sm-4 col-lg-2 mx-auto mt-5 pl-3 float-right">
+      <div>
+        <div class="mt-3">
+          <p>
+            <label for="price">Khoảng giá : </label>
+            <input disabled id="price" style="border:none; color:black; font-weight:bold; background-color: transparent;">
+          </p>
+          <div id = "slider-price"></div>
+        </div>
+        <div class="mt-5">
+          <p>
+            <label for="vcpu">Cores : </label>
+            <input disabled id="vcpu" style="border:none; color:black; font-weight:bold; background-color: transparent;">
+          </p>
+          <div id = "slider-vcpu"></div>
+        </div>
+        <div class="mt-5">
+          <p>
+            <label for="ssd">SSD : </label>
+            <input disabled id="ssd" style="border:none; color:black; font-weight:bold; background-color: transparent;">
+          </p>
+          <div id = "slider-ssd"></div>
+        </div>
+        <div class="mt-5">
+          <p>
+            <label for="ram">RAM : </label>
+            <input disabled id="ram" style="border:none; color:black; font-weight:bold; background-color: transparent;">
+          </p>
+          <div id = "slider-ram"></div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  </div>
+  <div class="container col-md-8 text-center">
+    <pre style="font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;" class="m-1 font-italic">
+      ***Giá đã bao gồm VAT hoặc phí ICANN nếu có.
+      Nhấn vào biểu tượng <i class="fas fa-link m-1 text-primary"></i> để xem thông tin chi tiết.
+    </pre>
+    <p class="mb-3"><b>Sử dụng ô Tìm kiếm</b> để xem thêm.</p>
+  </div>
+{% endblock %}
+{% block javascript %}
+<script src = "https://code.jquery.com/jquery-1.12.1.js"></script>
+<script src = "https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+  $(function() {
+     $( "#slider-price" ).slider({
+        range:true,
+        min: 0,
+        max: 50000000,
+        step: 200000,
+        values: [ 0, 50000000 ],
+        slide: function( event, ui ) {
+           $( "#price" ).val(ui.values[ 0 ] + " đ - " + ui.values[ 1 ] + ' đ');
+        }
+     });
+     $( "#price" ).val( $( "#slider-price" ).slider( "values", 0 ) +
+        " đ - " + $( "#slider-price" ).slider( "values", 1 ) + ' đ');
+  });
+  $(function() {
+     $( "#slider-vcpu" ).slider({
+        range:true,
+        min: 1,
+        max: 24,
+        step: 1,
+        values: [ 1, 24 ],
+        slide: function( event, ui ) {
+           $( "#vcpu" ).val(ui.values[ 0 ] + " - " + ui.values[ 1 ]);
+        }
+     });
+     $( "#vcpu" ).val( $( "#slider-vcpu" ).slider( "values", 0 ) +
+        " - " + $( "#slider-vcpu" ).slider( "values", 1 ));
+  });
+  $(function() {
+     $( "#slider-ssd" ).slider({
+        range:true,
+        min: 0,
+        max: 1000,
+        step: 20,
+        values: [ 0, 1000 ],
+        slide: function( event, ui ) {
+           $( "#ssd" ).val(ui.values[ 0 ] + " GB - " + ui.values[ 1 ] + ' GB');
+        }
+     });
+     $( "#ssd" ).val( $( "#slider-ssd" ).slider( "values", 0 ) +
+        " GB - " + $( "#slider-ssd" ).slider( "values", 1 ) + ' GB');
+  });
+  $(function() {
+     $( "#slider-ram" ).slider({
+        range:true,
+        min: 0,
+        max: 66,
+        step: 1,
+        values: [ 0, 66 ],
+        slide: function( event, ui ) {
+           $( "#ram" ).val(ui.values[ 0 ] + " GB - " + ui.values[ 1 ] + ' GB');
+        }
+     });
+     $( "#ram" ).val( $( "#slider-ram" ).slider( "values", 0 ) +
+        " GB - " + $( "#slider-ram" ).slider( "values", 1 ) + ' GB');
+  });
+</script>
+{% endblock %}
